@@ -1,0 +1,42 @@
+name: heimdall
+
+x-daemonless:
+  title: "Heimdall"
+  icon: ":material-view-dashboard:"
+  category: "Utilities"
+  description: "An Application dashboard and launcher — organize all your web apps and services in one place."
+  upstream_url: "https://github.com/linuxserver/Heimdall"
+  web_url: "https://heimdall.site/"
+  upstream_binary: true
+  user: "bsd"
+  mlock: false
+  appjail: true
+  community: ""
+
+  docs:
+    env:
+      PUID: "User ID for the application process"
+      PGID: "Group ID for the application process"
+      TZ: "Timezone for the container"
+      APP_URL: "Full URL where Heimdall is accessed (e.g. http://heimdall.lan)"
+    volumes:
+      /config: "Configuration directory (database, .env, storage)"
+    ports:
+      80: "Web UI"
+
+services:
+  heimdall:
+    image: ghcr.io/daemonless/heimdall:latest
+    container_name: heimdall
+    restart: unless-stopped
+
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=UTC
+
+    volumes:
+      - /path/to/containers/heimdall:/config
+
+    ports:
+      - "80:80"

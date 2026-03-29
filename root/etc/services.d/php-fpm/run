@@ -1,0 +1,9 @@
+#!/bin/sh
+# php-fpm s6 service
+
+mkdir -p /var/run
+chown bsd:bsd /var/run
+
+s6-ready-when fetch -qo /dev/null http://localhost:80/daemonless-ping
+
+exec /usr/local/sbin/php-fpm -F

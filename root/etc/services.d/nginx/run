@@ -1,0 +1,7 @@
+#!/bin/sh
+# nginx s6 service
+
+s6-ready-when fetch -qo /dev/null http://localhost:80/daemonless-ping
+echo "[heimdall] Heimdall is ready"
+
+exec /usr/local/sbin/nginx -g "daemon off;"

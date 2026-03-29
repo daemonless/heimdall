@@ -1,0 +1,6 @@
+#!/bin/sh
+# Heimdall queue worker - wait for nginx to be ready (ensures migrations are done)
+
+s6-ready-when fetch -qo /dev/null http://localhost:80/daemonless-ping
+
+exec s6-setuidgid bsd php /app/www/artisan queue:work database --sleep=3 --tries=3

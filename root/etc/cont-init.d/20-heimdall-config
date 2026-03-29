@@ -1,0 +1,102 @@
+#!/bin/sh
+# Initialize Heimdall
+
+PUID=${PUID:-1000}
+PGID=${PGID:-1000}
+TZ=${TZ:-UTC}
+
+APP_DIR=/app/www
+
+echo "-------------------------------------"
+echo "UID/GID: $PUID/$PGID"
+echo "-------------------------------------"
+
+# Create persistent config directories
+mkdir -p \
+    /config/www/avatars \
+    /config/www/backgrounds \
+    /config/www/icons \
+    /config/www/logs \
+    /config/www/SupportedApps \
+    /config/log/nginx \
+    /config/nginx \
+    /var/log/nginx \
+    /var/run
+
+# First run: move app from staging location
+if [ -d /app/www-tmp ]; then
+    echo "New container detected, installing Heimdall"
+    mv /app/www-tmp /app/www
+fi
+
+# Create symlinks (individual files/dirs → /config/www/)
+_symlink() {
+    target="$1"
+    link_name="/config/www/$(basename "$target")"
+    if [ -e "$target" ] && [ ! -L "$target" ]; then
+        rm -rf "$target"
+    fi
+    if [ ! -L "$target" ]; then
+        ln -sf "$link_name" "$target"
+    fi
+}
+
+_symlink "$APP_DIR/storage/app/public/avatars"
+_symlink "$APP_DIR/storage/app/public/backgrounds"
+_symlink "$APP_DIR/storage/app/public/icons"
+_symlink "$APP_DIR/storage/logs"
+_symlink "$APP_DIR/app/SupportedApps"
+_symlink "$APP_DIR/database/app.sqlite"
+_symlink "$APP_DIR/.env"
+
+# Symlink searchproviders.yaml
+if [ ! -f /config/www/searchproviders.yaml ] && \
+   [ -f "$APP_DIR/storage/app/searchproviders.yaml" ]; then
+    cp "$APP_DIR/storage/app/searchproviders.yaml" /config/www/searchproviders.yaml
+fi
+rm -f "$APP_DIR/storage/app/searchproviders.yaml"
+ln -sf /config/www/searchproviders.yaml "$APP_DIR/storage/app/searchproviders.yaml"
+
+# Copy default nginx configs on first run
+if [ ! -f /config/nginx/site.conf ]; then
+    cp /defaults/site.conf /config/nginx/site.conf
+fi
+if [ ! -f /config/nginx/nginx.conf ]; then
+    cp /defaults/nginx.conf /config/nginx/nginx.conf
+fi
+ln -sf /config/nginx/nginx.conf /usr/local/etc/nginx/nginx.conf
+
+# Set ownership before running any artisan commands
+chown -R bsd:bsd /config /app
+
+# Create .env on first run
+if [ ! -f /config/www/.env ]; then
+    cp "$APP_DIR/.env.example" /config/www/.env 2>/dev/null || \
+    cat > /config/www/.env << EOF
+APP_NAME=Heimdall
+APP_ENV=production
+APP_DEBUG=false
+APP_URL=http://localhost
+LOG_CHANNEL=stack
+LOG_LEVEL=error
+DB_CONNECTION=sqlite
+CACHE_STORE=file
+QUEUE_CONNECTION=database
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+EOF
+    chown bsd:bsd /config/www/.env
+    echo "Generating APP_KEY..."
+    s6-setuidgid bsd php "$APP_DIR/artisan" key:generate --force
+fi
+
+# Ensure QUEUE_CONNECTION=database (Heimdall requires this for queue worker)
+if grep -q 'QUEUE_DRIVER=sync\|QUEUE_CONNECTION=sync' /config/www/.env; then
+    sed -i '' 's/QUEUE_DRIVER=sync/QUEUE_CONNECTION=database/' /config/www/.env
+    sed -i '' 's/QUEUE_CONNECTION=sync/QUEUE_CONNECTION=database/' /config/www/.env
+fi
+
+# Run migrations
+s6-setuidgid bsd php "$APP_DIR/artisan" migrate --force
+
+echo "Heimdall initialization complete"
