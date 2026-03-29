@@ -13,7 +13,7 @@ An Application dashboard and launcher — organize all your web apps and service
 | | |
 |---|---|
 | **Port** | 80 |
-| **Registry** | `localhost/heimdall` |
+| **Registry** | `ghcr.io/daemonless/heimdall` |
 | **Source** | [https://github.com/linuxserver/Heimdall](https://github.com/linuxserver/Heimdall) |
 | **Website** | [https://heimdall.site/](https://heimdall.site/) |
 
@@ -34,7 +34,7 @@ Before deploying, ensure your host environment is ready. See the [Quick Start Gu
 ```yaml
 services:
   heimdall:
-    image: localhost/heimdall:latest
+    image: ghcr.io/daemonless/heimdall:latest
     container_name: heimdall
     environment:
       - PUID=1000
@@ -88,7 +88,7 @@ volumes:
 ARG tag=latest
 
 OPTION overwrite=force
-OPTION from=localhost/heimdall:${tag}
+OPTION from=ghcr.io/daemonless/heimdall:${tag}
 ```
 
 ### Podman CLI
@@ -100,7 +100,7 @@ podman run -d --name heimdall \
   -e PGID=1000 \
   -e TZ=UTC \
   -v /path/to/containers/heimdall:/config \
-  localhost/heimdall:latest
+  ghcr.io/daemonless/heimdall:latest
 ```
 
 ### Ansible
@@ -109,7 +109,7 @@ podman run -d --name heimdall \
 - name: Deploy heimdall
   containers.podman.podman_container:
     name: heimdall
-    image: localhost/heimdall:latest
+    image: ghcr.io/daemonless/heimdall:latest
     state: started
     restart_policy: always
     env:
@@ -150,3 +150,6 @@ Access at: `http://localhost:80`
 **User:** `bsd` (UID/GID via PUID/PGID, defaults to 1000:1000)
 **Base:** FreeBSD 15.0
 
+---
+
+Need help? Join our [Discord](https://discord.gg/Kb9tkhecZT) community.
