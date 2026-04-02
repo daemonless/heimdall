@@ -1,12 +1,12 @@
 {
   "image": "heimdall",
-  "generated": "2026-03-29T18:12:13Z",
+  "generated": "2026-04-02T14:00:00Z",
   "tags": {
     "latest": {
       "arch": "amd64",
       "app_version": "v2.7.6",
       "source": "upstream",
-      "generated": "2026-03-29T18:11:58Z",
+      "generated": "2026-04-02T13:58:41Z",
       "packages": {
         "freebsd": [
           {
