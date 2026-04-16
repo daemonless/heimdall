@@ -1,13 +1,13 @@
 {
+  "generated": "2026-04-16T18:33:47Z",
   "image": "heimdall",
-  "generated": "2026-04-02T14:00:00Z",
   "tags": {
     "latest": {
-      "arch": "amd64",
       "app_version": "v2.7.6",
-      "source": "upstream",
-      "generated": "2026-04-02T13:58:41Z",
+      "arch": "amd64",
+      "generated": "2026-04-16T18:32:28Z",
       "packages": {
+        "dotnet": [],
         "freebsd": [
           {
             "name": "FreeBSD-audit-lib",
@@ -135,11 +135,11 @@
           },
           {
             "name": "capstone",
-            "version": "5.0.6"
+            "version": "5.0.7"
           },
           {
             "name": "curl",
-            "version": "8.17.0"
+            "version": "8.19.0_1"
           },
           {
             "name": "execline",
@@ -179,7 +179,7 @@
           },
           {
             "name": "libunistring",
-            "version": "1.4.1"
+            "version": "1.4.2"
           },
           {
             "name": "libxml2",
@@ -203,67 +203,67 @@
           },
           {
             "name": "php84",
-            "version": "8.4.16"
+            "version": "8.4.19"
           },
           {
             "name": "php84-ctype",
-            "version": "8.4.16"
+            "version": "8.4.19"
           },
           {
             "name": "php84-curl",
-            "version": "8.4.16"
+            "version": "8.4.19"
           },
           {
             "name": "php84-dom",
-            "version": "8.4.16"
+            "version": "8.4.19"
           },
           {
             "name": "php84-fileinfo",
-            "version": "8.4.16"
+            "version": "8.4.19"
           },
           {
             "name": "php84-filter",
-            "version": "8.4.16"
+            "version": "8.4.19"
           },
           {
             "name": "php84-intl",
-            "version": "8.4.16"
+            "version": "8.4.19"
           },
           {
             "name": "php84-mbstring",
-            "version": "8.4.16"
+            "version": "8.4.19"
           },
           {
             "name": "php84-opcache",
-            "version": "8.4.16"
+            "version": "8.4.19"
           },
           {
             "name": "php84-pdo",
-            "version": "8.4.16"
+            "version": "8.4.19"
           },
           {
             "name": "php84-pdo_sqlite",
-            "version": "8.4.16"
+            "version": "8.4.19"
           },
           {
             "name": "php84-session",
-            "version": "8.4.16"
+            "version": "8.4.19"
           },
           {
             "name": "php84-tokenizer",
-            "version": "8.4.16"
+            "version": "8.4.19"
           },
           {
             "name": "php84-xml",
-            "version": "8.4.16"
+            "version": "8.4.19"
           },
           {
             "name": "php84-zip",
-            "version": "8.4.16"
+            "version": "8.4.19"
           },
           {
             "name": "pkg",
-            "version": "2.5.1"
+            "version": "2.6.2_1"
           },
           {
             "name": "readline",
@@ -290,7 +290,6 @@
             "version": "1.5.7_1"
           }
         ],
-        "dotnet": [],
         "go": [],
         "java": [],
         "node": [],
@@ -299,9 +298,10 @@
         "ruby": [],
         "rust": []
       },
+      "source": "upstream",
       "summary": {
-        "freebsd": 70,
         "dotnet": 0,
+        "freebsd": 70,
         "go": 0,
         "java": 0,
         "node": 0,
