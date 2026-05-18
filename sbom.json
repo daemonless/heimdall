@@ -1,11 +1,11 @@
 {
-  "generated": "2026-05-07T08:04:12Z",
+  "generated": "2026-05-18T12:46:27Z",
   "image": "heimdall",
   "tags": {
     "latest": {
       "app_version": "v2.7.6",
       "arch": "amd64",
-      "generated": "2026-05-07T08:02:53Z",
+      "generated": "2026-05-18T12:45:08Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -131,7 +131,7 @@
           },
           {
             "name": "ca_root_nss",
-            "version": "3.117_2"
+            "version": "3.124"
           },
           {
             "name": "capstone",
@@ -139,7 +139,7 @@
           },
           {
             "name": "curl",
-            "version": "8.19.0_2"
+            "version": "8.20.0"
           },
           {
             "name": "execline",
