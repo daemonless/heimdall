@@ -66,6 +66,8 @@ if [ ! -f /config/nginx/nginx.conf ]; then
 fi
 ln -sf /config/nginx/nginx.conf /usr/local/etc/nginx/nginx.conf
 
+touch /config/log/nginx/access.log /config/log/nginx/error.log
+
 # Set ownership before running any artisan commands
 chown -R bsd:bsd /config /app
 
