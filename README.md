@@ -122,8 +122,6 @@ podman run -d --name heimdall \
       - "/path/to/containers/heimdall:/config"
 ```
 
-Access at: `http://localhost:80`
-
 ## Parameters
 
 ### Environment Variables
