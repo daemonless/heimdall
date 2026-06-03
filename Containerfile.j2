@@ -46,14 +46,11 @@ RUN pkg update && \
 
 # Fetch Heimdall release; fail loudly if the version/tarball can't be resolved
 # (a silent failure would ship an empty /app/www -> "File not found").
+# Auth via HTTP_AUTH (base64 header), NOT a token-in-URL: GitHub's new stateless
+# JWT GITHUB_TOKEN has dots and breaks fetch's URL parsing in the userinfo slot.
 RUN --mount=type=secret,id=github_token \
     TOKEN=$(cat /run/secrets/github_token 2>/dev/null | tr -d '[:space:]' || true) && \
-    if [ -n "$TOKEN" ]; then \
-        API_URL="https://x-access-token:${TOKEN}@api.github.com/repos/linuxserver/Heimdall/releases/latest"; \
-    else \
-        API_URL="${UPSTREAM_URL}"; \
-    fi && \
-    APP_VER="${APP_VERSION:-$(fetch -qo - "$API_URL" 2>/dev/null | jq -r "${UPSTREAM_JQ}")}" && \
+    APP_VER="${APP_VERSION:-$(HTTP_AUTH="${TOKEN:+basic:*:x-access-token:$TOKEN}" fetch -qo - "${UPSTREAM_URL}" 2>/dev/null | jq -r "${UPSTREAM_JQ}")}" && \
     if [ -z "$APP_VER" ] || [ "$APP_VER" = "null" ]; then \
         echo "ERROR: could not resolve Heimdall version from API (github_token bytes: $(printf %s "$TOKEN" | wc -c | tr -d ' '))" >&2; exit 1; \
     fi && \
