@@ -18,13 +18,11 @@ An Application dashboard and launcher — organize all your web apps and service
 | **Website** | [https://heimdall.site/](https://heimdall.site/) |
 
 ## Version Tags
-
 | Tag | Description | Best For |
 | :--- | :--- | :--- |
 | `latest` | **Upstream Binary**. Built from official release. | Most users. Matches Linux Docker behavior. |
 
 ## Prerequisites
-
 Before deploying, ensure your host environment is ready. See the [Quick Start Guide](https://daemonless.io/guides/quick-start) for host setup instructions.
 
 ## Deployment
@@ -34,33 +32,38 @@ Before deploying, ensure your host environment is ready. See the [Quick Start Gu
 ```yaml
 services:
   heimdall:
-    image: ghcr.io/daemonless/heimdall:latest
+    image: "ghcr.io/daemonless/heimdall:latest"
     container_name: heimdall
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=UTC
+      - PUID=1000  # User ID for the application process
+      - PGID=1000  # Group ID for the application process
+      - TZ=UTC  # Timezone for the container
+      - APP_URL=  # Full URL where Heimdall is accessed (e.g. http://heimdall.lan)
     volumes:
       - "/path/to/containers/heimdall:/config"
     ports:
-      - 80:80
+      - "80:80"
     restart: unless-stopped
 ```
 
 ### AppJail Director
-
 **.env**:
 
 ```
+# .env
+
 DIRECTOR_PROJECT=heimdall
 PUID=1000
 PGID=1000
 TZ=UTC
+APP_URL=
 ```
 
 **appjail-director.yml**:
 
 ```yaml
+# appjail-director.yml
+
 options:
   - virtualnet: ':<random> default'
   - nat:
@@ -69,12 +72,14 @@ services:
     name: heimdall
     options:
       - container: 'boot args:--pull'
+      - expose: '80:80 proto:tcp' \
     oci:
       user: root
       environment:
         - PUID: !ENV '${PUID}'
         - PGID: !ENV '${PGID}'
         - TZ: !ENV '${TZ}'
+        - APP_URL: !ENV '${APP_URL}'
     volumes:
       - heimdall: /config
 volumes:
@@ -85,11 +90,14 @@ volumes:
 **Makejail**:
 
 ```
+# Makejail
+
 ARG tag=latest
 
 OPTION overwrite=force
 OPTION from=ghcr.io/daemonless/heimdall:${tag}
 ```
+**Note**: Exposing ports in AppJail means that your service can be reached from remote hosts. If that is not your intention, do not expose the ports and communicate with the service using the IPv4 address assigned by the virtual network.
 
 ### Podman CLI
 
@@ -99,9 +107,28 @@ podman run -d --name heimdall \
   -e PUID=1000 \
   -e PGID=1000 \
   -e TZ=UTC \
+  -e APP_URL= \
   -v /path/to/containers/heimdall:/config \
   ghcr.io/daemonless/heimdall:latest
 ```
+
+### AppJail
+
+```bash
+appjail oci run -Pd \
+  -o overwrite=force \
+  -o container="args:--pull" \
+  -o virtualnet=":<random> default" \
+  -o nat \
+  -o expose="80:80 proto:tcp" \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ=UTC \
+  -e APP_URL= \
+  -o fstab="/path/to/containers/heimdall /config <pseudofs>" \
+  ghcr.io/daemonless/heimdall:latest heimdall
+```
+**Note**: Exposing ports in AppJail means that your service can be reached from remote hosts. If that is not your intention, do not expose the ports and communicate with the service using the IPv4 address assigned by the virtual network.
 
 ### Ansible
 
@@ -109,18 +136,21 @@ podman run -d --name heimdall \
 - name: Deploy heimdall
   containers.podman.podman_container:
     name: heimdall
-    image: ghcr.io/daemonless/heimdall:latest
+    image: "ghcr.io/daemonless/heimdall:latest"
     state: started
     restart_policy: always
     env:
       PUID: "1000"
       PGID: "1000"
       TZ: "UTC"
+      APP_URL: ""
     ports:
       - "80:80"
     volumes:
       - "/path/to/containers/heimdall:/config"
 ```
+
+Access at: `http://localhost:80`
 
 ## Parameters
 
@@ -131,6 +161,7 @@ podman run -d --name heimdall \
 | `PUID` | `1000` | User ID for the application process |
 | `PGID` | `1000` | Group ID for the application process |
 | `TZ` | `UTC` | Timezone for the container |
+| `APP_URL` | `` | Full URL where Heimdall is accessed (e.g. http://heimdall.lan) |
 
 ### Volumes
 
@@ -146,7 +177,7 @@ podman run -d --name heimdall \
 
 **Architectures:** amd64
 **User:** `bsd` (UID/GID via PUID/PGID, defaults to 1000:1000)
-**Base:** FreeBSD 15.0
+**Base:** FreeBSD 15.1
 
 ---
 
