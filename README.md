@@ -20,7 +20,7 @@ An Application dashboard and launcher — organize all your web apps and service
 ## Version Tags
 | Tag | Description | Best For |
 | :--- | :--- | :--- |
-| `latest` | **Upstream Binary**. Built from official release. | Most users. Matches Linux Docker behavior. |
+| `latest` | **Upstream Binary**. Built from official release. | Most users — recommended. |
 
 ## Prerequisites
 Before deploying, ensure your host environment is ready. See the [Quick Start Guide](https://daemonless.io/guides/quick-start) for host setup instructions.
@@ -72,7 +72,7 @@ services:
     name: heimdall
     options:
       - container: 'boot args:--pull'
-      - expose: '80:80 proto:tcp' \
+      - expose: '80:80 proto:tcp'
     oci:
       user: root
       environment:
@@ -175,7 +175,7 @@ Access at: `http://localhost:80`
 |------|----------|-------------|
 | `80` | TCP | Web UI |
 
-**Architectures:** amd64
+**Architectures:** amd64, aarch64
 **User:** `bsd` (UID/GID via PUID/PGID, defaults to 1000:1000)
 **Base:** FreeBSD 15.1
 
