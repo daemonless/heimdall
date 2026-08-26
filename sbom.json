@@ -1,11 +1,11 @@
 {
-  "generated": "2026-08-12T23:38:25Z",
+  "generated": "2026-08-26T08:03:18Z",
   "image": "heimdall",
   "tags": {
     "latest-amd64": {
       "app_version": "v2.8.2",
       "arch": "amd64",
-      "generated": "2026-08-12T23:37:16Z",
+      "generated": "2026-08-26T07:58:32Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -252,7 +252,7 @@
               "MPL20"
             ],
             "name": "ca_root_nss",
-            "version": "3.125"
+            "version": "3.127"
           },
           {
             "licenses": [
