@@ -1,11 +1,11 @@
 {
-  "generated": "2026-09-05T16:29:47Z",
+  "generated": "2026-09-17T13:03:00Z",
   "image": "heimdall",
   "tags": {
     "latest-amd64": {
       "app_version": "v2.8.3",
       "arch": "amd64",
-      "generated": "2026-09-05T16:28:30Z",
+      "generated": "2026-09-17T13:00:39Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -252,14 +252,14 @@
               "MPL20"
             ],
             "name": "ca_root_nss",
-            "version": "3.128"
+            "version": "3.129"
           },
           {
             "licenses": [
               "MIT"
             ],
             "name": "curl",
-            "version": "8.21.0"
+            "version": "8.22.0"
           },
           {
             "licenses": [
