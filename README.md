@@ -41,7 +41,7 @@ services:
       - TZ=UTC  # Timezone for the container
       - APP_URL=  # Full URL where Heimdall is accessed (e.g. http://heimdall.lan)
     volumes:
-      - "/path/to/containers/heimdall:/config"
+      - "/containers/heimdall:/config"
     ports:
       - "80:80"
     # always (not unless-stopped) so FreeBSD's podman rc.d auto-starts it at boot
@@ -88,7 +88,7 @@ services:
       - heimdall: /config
 volumes:
   heimdall:
-    device: '/path/to/containers/heimdall'
+    device: '/containers/heimdall'
 ```
 
 **Makejail**:
@@ -104,47 +104,6 @@ OPTION from=ghcr.io/daemonless/heimdall:${tag}
 ```
 
 Save the files above, then run `appjail-director up`.
-
-
-> [!WARNING]
-> Exposing ports in AppJail means that your service can be reached from remote hosts. If that is not your intention, do not expose the ports and communicate with the service using the jail's IPv4 address or hostname assigned by the virtual network.
->
-> To avoid exposing ports, just remove the `expose` option in your `appjail-director.yml` or from your command-line arguments.
-
-### Podman CLI
-
-```bash
-podman run -d --name heimdall \
-  -p 80:80 \
-  -e PUID=1000 \
-  -e PGID=1000 \
-  -e TZ=UTC \
-  -e APP_URL= \
-  -v /path/to/containers/heimdall:/config \
-  ghcr.io/daemonless/heimdall:latest
-```
-
-Save as `run.sh`, then run `sh run.sh`.
-
-### AppJail
-
-
-```bash
-appjail oci run -Pd \
-  -o overwrite=force \
-  -o container="args:--pull" \
-  -o virtualnet=":<random> default" \
-  -o nat \
-  -o expose="80:80 proto:tcp" \
-  -e PUID=1000 \
-  -e PGID=1000 \
-  -e TZ=UTC \
-  -e APP_URL= \
-  -o fstab="/path/to/containers/heimdall /config <pseudofs>" \
-  ghcr.io/daemonless/heimdall:latest heimdall
-```
-
-Save the files above, then run `sh run.sh`.
 
 
 > [!WARNING]
@@ -170,42 +129,10 @@ services:
       - TZ=UTC
       - APP_URL=
     volumes:
-      - "/path/to/containers/heimdall:/config"
+      - "/containers/heimdall:/config"
 ```
 
-Save as `bastille-compose.yml`, then run `bastille up`. Or via CLI:
-
-```bash
-bastille create -O \
-  --env PUID=1000 \
-  --env PGID=1000 \
-  --env TZ=UTC \
-  --env APP_URL= \
-  --volume /path/to/containers/heimdall /config \
-  heimdall ghcr.io/daemonless/heimdall:latest inherit
-```
-
-### Ansible
-
-```yaml
-- name: Deploy heimdall
-  containers.podman.podman_container:
-    name: heimdall
-    image: "ghcr.io/daemonless/heimdall:latest"
-    state: started
-    restart_policy: always
-    env:
-      PUID: "1000"
-      PGID: "1000"
-      TZ: "UTC"
-      APP_URL: ""
-    ports:
-      - "80:80"
-    volumes:
-      - "/path/to/containers/heimdall:/config"
-```
-
-Save as `heimdall-deploy.yaml`, then run `ansible-playbook heimdall-deploy.yaml`.
+Save as `bastille-compose.yml`, then run `bastille up`.
 
 Access at: `http://localhost:80`
 
