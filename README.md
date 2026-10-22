@@ -39,7 +39,7 @@ services:
       - PUID=1000  # User ID for the application process
       - PGID=1000  # Group ID for the application process
       - TZ=UTC  # Timezone for the container
-      - APP_URL=  # Full URL where Heimdall is accessed (e.g. http://heimdall.lan)
+      # - APP_URL=  # Full URL where Heimdall is accessed (e.g. http://heimdall.lan)
     volumes:
       - "/containers/heimdall:/config"
     ports:
@@ -60,7 +60,6 @@ DIRECTOR_PROJECT=heimdall
 PUID=1000
 PGID=1000
 TZ=UTC
-APP_URL=
 ```
 
 **appjail-director.yml**:
@@ -83,7 +82,6 @@ services:
         - PUID: !ENV '${PUID}'
         - PGID: !ENV '${PGID}'
         - TZ: !ENV '${TZ}'
-        - APP_URL: !ENV '${APP_URL}'
     volumes:
       - heimdall: /config
 volumes:
@@ -127,7 +125,6 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=UTC
-      - APP_URL=
     volumes:
       - "/containers/heimdall:/config"
 ```
