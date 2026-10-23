@@ -65,9 +65,7 @@ RUN mkdir -p /config && \
 
 # Copy s6 service scripts and defaults
 COPY root/ /
-
-# Make scripts executable
-RUN chmod +x /etc/cont-init.d/* /etc/services.d/*/run 2>/dev/null || true
+RUN chmod +x /daemonless/libexec/* /daemonless/init.d/*
 
 # --- Expose (Injected by Generator) ---
 EXPOSE 80

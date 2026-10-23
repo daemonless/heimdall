@@ -1,0 +1,7 @@
+#!/bin/sh
+# php-fpm rcd unit
+
+mkdir -p /var/run
+chown bsd:bsd /var/run
+
+exec /usr/local/sbin/php-fpm -F

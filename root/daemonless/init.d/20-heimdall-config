@@ -89,7 +89,7 @@ SESSION_LIFETIME=120
 EOF
     chown bsd:bsd /config/www/.env
     echo "Generating APP_KEY..."
-    s6-setuidgid bsd php "$APP_DIR/artisan" key:generate --force
+    dsu bsd php "$APP_DIR/artisan" key:generate --force
 fi
 
 # Ensure QUEUE_CONNECTION=database (Heimdall requires this for queue worker)
@@ -99,6 +99,6 @@ if grep -q 'QUEUE_DRIVER=sync\|QUEUE_CONNECTION=sync' /config/www/.env; then
 fi
 
 # Run migrations
-s6-setuidgid bsd php "$APP_DIR/artisan" migrate --force
+dsu bsd php "$APP_DIR/artisan" migrate --force
 
 echo "Heimdall initialization complete"
