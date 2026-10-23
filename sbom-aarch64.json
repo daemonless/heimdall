@@ -1,11 +1,11 @@
 {
-  "generated": "2026-10-22T08:31:34Z",
+  "generated": "2026-10-23T18:04:03Z",
   "image": "heimdall",
   "tags": {
     "latest-aarch64": {
       "app_version": "v2.8.3",
       "arch": "aarch64",
-      "generated": "2026-10-22T08:30:58Z",
+      "generated": "2026-10-23T18:03:33Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -181,13 +181,6 @@
             "licenses": [
               "BSD2CLAUSE"
             ],
-            "name": "FreeBSD-rc",
-            "version": "15.1"
-          },
-          {
-            "licenses": [
-              "BSD2CLAUSE"
-            ],
             "name": "FreeBSD-resolvconf",
             "version": "15.1"
           },
@@ -277,13 +270,6 @@
           },
           {
             "licenses": [
-              "ISCL"
-            ],
-            "name": "execline",
-            "version": "2.9.8.1"
-          },
-          {
-            "licenses": [
               "ICU"
             ],
             "name": "icu",
@@ -367,14 +353,14 @@
               "BSD3CLAUSE"
             ],
             "name": "libzip",
-            "version": "1.11.4"
+            "version": "1.12.1"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "nginx",
-            "version": "1.30.5_2,3"
+            "version": "1.30.6,3"
           },
           {
             "licenses": [
@@ -511,20 +497,6 @@
           },
           {
             "licenses": [
-              "ISCL"
-            ],
-            "name": "s6",
-            "version": "2.14.0.1"
-          },
-          {
-            "licenses": [
-              "ISCL"
-            ],
-            "name": "skalibs",
-            "version": "2.14.5.1"
-          },
-          {
-            "licenses": [
               "PD"
             ],
             "name": "sqlite3",
@@ -550,7 +522,7 @@
       "source": "upstream",
       "summary": {
         "dotnet": 0,
-        "freebsd": 75,
+        "freebsd": 71,
         "go": 0,
         "java": 0,
         "node": 0,
@@ -558,7 +530,7 @@
         "python": 0,
         "ruby": 0,
         "rust": 0,
-        "total": 75
+        "total": 71
       }
     }
   }
