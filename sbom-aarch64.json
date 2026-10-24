@@ -1,11 +1,11 @@
 {
-  "generated": "2026-10-23T18:04:03Z",
+  "generated": "2026-10-24T10:03:51Z",
   "image": "heimdall",
   "tags": {
     "latest-aarch64": {
       "app_version": "v2.8.3",
       "arch": "aarch64",
-      "generated": "2026-10-23T18:03:33Z",
+      "generated": "2026-10-24T10:03:22Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
