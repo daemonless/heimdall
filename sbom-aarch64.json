@@ -1,11 +1,11 @@
 {
-  "generated": "2026-10-24T10:03:51Z",
+  "generated": "2026-10-29T22:29:48Z",
   "image": "heimdall",
   "tags": {
     "latest-aarch64": {
-      "app_version": "v2.8.3",
+      "app_version": "v2.8.4",
       "arch": "aarch64",
-      "generated": "2026-10-24T10:03:22Z",
+      "generated": "2026-10-29T22:29:10Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -189,7 +189,7 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-runtime",
-            "version": "15.1p5"
+            "version": "15.1p6"
           },
           {
             "licenses": [
