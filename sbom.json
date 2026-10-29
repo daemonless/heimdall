@@ -1,11 +1,11 @@
 {
-  "generated": "2026-10-24T09:06:01Z",
+  "generated": "2026-10-29T22:00:35Z",
   "image": "heimdall",
   "tags": {
     "latest-amd64": {
-      "app_version": "v2.8.3",
+      "app_version": "v2.8.4",
       "arch": "amd64",
-      "generated": "2026-10-24T09:05:08Z",
+      "generated": "2026-10-29T21:59:31Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -189,7 +189,7 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-runtime",
-            "version": "15.1p5"
+            "version": "15.1p6"
           },
           {
             "licenses": [
@@ -252,14 +252,14 @@
               "MIT"
             ],
             "name": "brotli",
-            "version": "1.2.0,1"
+            "version": "1.2.1,1"
           },
           {
             "licenses": [
               "MPL20"
             ],
             "name": "ca_root_nss",
-            "version": "3.131.1"
+            "version": "3.132"
           },
           {
             "licenses": [
@@ -381,105 +381,105 @@
               "PHP301"
             ],
             "name": "php84",
-            "version": "8.4.27_1"
+            "version": "8.4.27_2"
           },
           {
             "licenses": [
               "PHP301"
             ],
             "name": "php84-ctype",
-            "version": "8.4.27_1"
+            "version": "8.4.27_2"
           },
           {
             "licenses": [
               "PHP301"
             ],
             "name": "php84-curl",
-            "version": "8.4.27_1"
+            "version": "8.4.27_2"
           },
           {
             "licenses": [
               "PHP301"
             ],
             "name": "php84-dom",
-            "version": "8.4.27_1"
+            "version": "8.4.27_2"
           },
           {
             "licenses": [
               "PHP301"
             ],
             "name": "php84-fileinfo",
-            "version": "8.4.27_1"
+            "version": "8.4.27_2"
           },
           {
             "licenses": [
               "PHP301"
             ],
             "name": "php84-filter",
-            "version": "8.4.27_1"
+            "version": "8.4.27_2"
           },
           {
             "licenses": [
               "PHP301"
             ],
             "name": "php84-intl",
-            "version": "8.4.27_1"
+            "version": "8.4.27_2"
           },
           {
             "licenses": [
               "PHP301"
             ],
             "name": "php84-mbstring",
-            "version": "8.4.27_1"
+            "version": "8.4.27_2"
           },
           {
             "licenses": [
               "PHP301"
             ],
             "name": "php84-opcache",
-            "version": "8.4.27_1"
+            "version": "8.4.27_2"
           },
           {
             "licenses": [
               "PHP301"
             ],
             "name": "php84-pdo",
-            "version": "8.4.27_1"
+            "version": "8.4.27_2"
           },
           {
             "licenses": [
               "PHP301"
             ],
             "name": "php84-pdo_sqlite",
-            "version": "8.4.27_1"
+            "version": "8.4.27_2"
           },
           {
             "licenses": [
               "PHP301"
             ],
             "name": "php84-session",
-            "version": "8.4.27_1"
+            "version": "8.4.27_2"
           },
           {
             "licenses": [
               "PHP301"
             ],
             "name": "php84-tokenizer",
-            "version": "8.4.27_1"
+            "version": "8.4.27_2"
           },
           {
             "licenses": [
               "PHP301"
             ],
             "name": "php84-xml",
-            "version": "8.4.27_1"
+            "version": "8.4.27_2"
           },
           {
             "licenses": [
               "PHP301"
             ],
             "name": "php84-zip",
-            "version": "8.4.27_1"
+            "version": "8.4.27_2"
           },
           {
             "licenses": [
